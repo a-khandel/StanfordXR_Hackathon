@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # IdeaSpace  
 ### _Put your thoughts on the board!_
 
@@ -141,5 +142,3 @@ This project is licensed under the ***MIT License.***
 - OpenAI for real-time speech + diagram reasoning
 - Tldraw for the collaborative whiteboard engine
 - Whisper for high-accuracy real-time speech recognition
-
-

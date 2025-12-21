@@ -2,5 +2,7 @@
 node_modules
 .yarn/
 .dev.vars
+<<<<<<< HEAD
 *.dev.vars
 .env
+*.dev.vars
