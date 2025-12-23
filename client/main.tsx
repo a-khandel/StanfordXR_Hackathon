@@ -1,35 +1,46 @@
-// import React from 'react'
-// import ReactDOM from 'react-dom/client'
-// import App from './App'
-// import './index.css'
-
-// ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-// 	<React.StrictMode>
-// 		<App />
-// 	</React.StrictMode>
-// )
-
 import React from "react"
 import ReactDOM from "react-dom/client"
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
-import App from "./App" // your existing app.tsx (might be ./App depending on file name)
-import './index.css'
-import Dashboard from "./Dashboard"
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom"
+import "./index.css"
 
+import App from "./App"
+import Dashboard from "./Dashboard"
+import SignIn from "./SignIn"
+
+import { AuthProvider } from "./auth"
+import ProtectedRoute from "./ProtectedRoute"
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        {/* send users to dashboard first */}
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+    <AuthProvider>
+      <HashRouter>
+        <Routes>
+          {/* default */}
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
-        {/* dashboard */}
-        <Route path="/dashboard" element={<Dashboard />} />
+          {/* public */}
+          <Route path="/signin" element={<SignIn />} />
 
-        {/* canvas page */}
-        <Route path="/app/:canvasId" element={<App />} />
-      </Routes>
-    </BrowserRouter>
+          {/* protected */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/app/:canvasId"
+            element={
+              <ProtectedRoute>
+                <App />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </HashRouter>
+    </AuthProvider>
   </React.StrictMode>
 )
